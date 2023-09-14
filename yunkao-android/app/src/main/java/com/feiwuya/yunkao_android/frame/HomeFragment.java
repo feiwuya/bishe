@@ -9,10 +9,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.feiwuya.yunkao_android.R;
+import com.feiwuya.yunkao_android.util.CommonEnum;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
@@ -20,7 +25,7 @@ import com.youth.banner.indicator.CircleIndicator;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
+
 
 /**
  * A simple {@link Fragment} subclass.
@@ -58,6 +63,9 @@ public class HomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         homeBanner = getView().findViewById(R.id.home_banner);
+//         =======================================
+
+//         =======================================
         List<String> bannerList = new ArrayList<>();
         // :TODO 轮播图设置
         bannerList.add("https://p3.ssl.qhimgs1.com/t017e6730377e3c2003.jpg");
