@@ -4,27 +4,32 @@
             云考管理平台
         </div>
         <div class="menu-items">
-            <RouterLink to="/" active-class="active" exact tag="button" class="side-btn">
+            <RouterLink to="/" active-class="active" exact tag="button" class="side-btn" @click="toggleActive(index)"
+                :class="{ 'active': activeIndex === index }">
                 <div class="link-container">
                     监控面板
                 </div>
             </RouterLink>
-            <RouterLink to="/page1" active-class="active" exact tag="button" class="side-btn">
+            <RouterLink to="/page1" active-class="active" exact tag="button" class="side-btn" @click="toggleActive(index)"
+                :class="{ 'active': activeIndex === index }">
                 <div class="link-container">
                     用户管理
                 </div>
             </RouterLink>
-            <RouterLink to="/page2" active-class="active" exact tag="button" class="side-btn">
+            <RouterLink to="/page2" active-class="active" exact tag="button" class="side-btn" @click="toggleActive(index)"
+                :class="{ 'active': activeIndex === index }">
                 <div class="link-container">
                     题目管理
                 </div>
             </RouterLink>
-            <RouterLink to="/page3" active-class="active" exact tag="button" class="side-btn">
+            <RouterLink to="/page3" active-class="active" exact tag="button" class="side-btn" @click="toggleActive(index)"
+                :class="{ 'active': activeIndex === index }">
                 <div class="link-container">
                     页面3
                 </div>
             </RouterLink>
-            <RouterLink to="/page4" active-class="active" exact tag="button" class="side-btn">
+            <RouterLink to="/page4" active-class="active" exact tag="button" class="side-btn" @click="toggleActive(index)"
+                :class="{ 'active': activeIndex === index }">
                 <div class="link-container">
                     页面4
                 </div>
@@ -34,7 +39,22 @@
 </template>
 <script>
 import { RouterLink } from 'vue-router';
+export default {
+    data() {
+        return {
+            activeIndex: null
+        }
+    },
+    methods: {
+        toggleActive(index) {
+            this.activeIndex = index;
 
+            setTimeout(() => {
+                this.activeIndex = null;
+            }, 500);
+        }
+    }
+}
 </script>
 
 <style scoped>
@@ -51,7 +71,7 @@ import { RouterLink } from 'vue-router';
     margin-left: 6px;
 }
 
-.menu-items> * {
+.menu-items>* {
     margin-top: 60px;
 }
 
@@ -66,6 +86,8 @@ import { RouterLink } from 'vue-router';
     font-weight: 500;
     margin-left: 10px;
     border-radius: 30px 0 0 30px;
+    transition: all 0s ease;
+
 
 
 }
@@ -98,6 +120,7 @@ import { RouterLink } from 'vue-router';
     color: white;
     background-color: transparent;
 }
+
 .side-btn.active .link-container::before {
     position: absolute;
     top: -60px;
