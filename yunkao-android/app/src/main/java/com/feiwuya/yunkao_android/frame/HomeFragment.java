@@ -2,7 +2,6 @@ package com.feiwuya.yunkao_android.frame;
 
 import android.os.Bundle;
 
-import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
@@ -14,21 +13,14 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.resource.bitmap.RoundedCorners;
 import com.bumptech.glide.request.RequestOptions;
 import com.feiwuya.yunkao_android.R;
-import com.feiwuya.yunkao_android.util.CommonEnum;
-import com.feiwuya.yunkao_android.util.HttpUtil;
 import com.youth.banner.Banner;
 import com.youth.banner.adapter.BannerImageAdapter;
 import com.youth.banner.holder.BannerImageHolder;
 import com.youth.banner.indicator.CircleIndicator;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-import okhttp3.Call;
-import okhttp3.Callback;
-import okhttp3.Response;
-import rxhttp.RxHttpPlugins;
 
 
 /**
@@ -67,19 +59,6 @@ public class HomeFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         homeBanner = getView().findViewById(R.id.home_banner);
-//         =======================================
-        HttpUtil.get(CommonEnum.URI + "/banner", new Callback() {
-            @Override
-            public void onFailure(@NonNull Call call, @NonNull IOException e) {
-
-            }
-
-            @Override
-            public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
-                System.out.println(response.body().toString());
-            }
-        });
-//         =======================================
         List<String> bannerList = new ArrayList<>();
         // :TODO 轮播图设置
         bannerList.add("https://p3.ssl.qhimgs1.com/t017e6730377e3c2003.jpg");
