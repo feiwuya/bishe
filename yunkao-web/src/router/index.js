@@ -17,8 +17,8 @@ const router = new VueRouter({
           component: () => import('../views/Overview.vue')
         },
         {
-          path: '/page1',
-          component: () => import('../views/Page1.vue')
+          path: '/app',
+          component: () => import('../views/Appmanager.vue')
         },
         {
           path: '/page2',

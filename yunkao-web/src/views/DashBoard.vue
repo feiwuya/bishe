@@ -6,7 +6,7 @@
     <div class="content-container">
 
       <div class="menu-bar">
-
+          <Menubar />
       </div>
 
       <div class="content">
@@ -21,11 +21,13 @@
 <script>
 import { RouterView } from 'vue-router';
 import Sidebar from '../components/Sidebar.vue'
+import Menubar from '../components/Menubar.vue'
 export default {
   name: 'Home',
   components: {
     Sidebar,
-    RouterView
+    RouterView,
+    Menubar
   }
 }
 </script>
@@ -47,16 +49,17 @@ export default {
 
 .content-container {
   display: grid;
-  grid-template-rows: auto 1fr;
+  grid-template-rows: auto 2fr;
 }
 
 .menu-bar {
   display: flex;
   background-color: #fff;
-  margin: 6px 6px 6px 0px;
+  margin: 6px 6px 6px 6px;
+  padding: 5px;
   border-radius: 10px;
   height: 80px;
-  justify-content: center;
+  justify-content: right;
   align-items: center;
 }
 </style>

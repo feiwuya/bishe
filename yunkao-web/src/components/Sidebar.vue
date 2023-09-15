@@ -7,13 +7,13 @@
             <RouterLink to="/" active-class="active" exact tag="button" class="side-btn" @click="toggleActive(index)"
                 :class="{ 'active': activeIndex === index }">
                 <div class="link-container">
-                    监控面板
+                    仪表盘
                 </div>
             </RouterLink>
-            <RouterLink to="/page1" active-class="active" exact tag="button" class="side-btn" @click="toggleActive(index)"
+            <RouterLink to="/app" active-class="active" exact tag="button" class="side-btn" @click="toggleActive(index)"
                 :class="{ 'active': activeIndex === index }">
                 <div class="link-container">
-                    用户管理
+                    APP 管理
                 </div>
             </RouterLink>
             <RouterLink to="/page2" active-class="active" exact tag="button" class="side-btn" @click="toggleActive(index)"
@@ -86,10 +86,6 @@ export default {
     font-weight: 500;
     margin-left: 10px;
     border-radius: 30px 0 0 30px;
-    transition: all 0s ease;
-
-
-
 }
 
 .active::before {
