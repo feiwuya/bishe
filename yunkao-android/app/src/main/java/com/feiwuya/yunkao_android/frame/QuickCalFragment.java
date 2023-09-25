@@ -1,7 +1,6 @@
 package com.feiwuya.yunkao_android.frame;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.Nullable;
@@ -14,6 +13,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.feiwuya.yunkao_android.R;
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -94,20 +94,25 @@ public class QuickCalFragment extends Fragment {
         TextView proNumText = view.findViewById(R.id.pro_num);
 
         // 点击题量选择弹出选择框
+        String[] items = {"快速模式（题量：10）", "正常模式（题量：15）"};
+        int[] num = {10}; // 题量设置
         settingNumBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
-                String[] items = {"快速模式（题量：10）", "正常模式（题量：15）"};
-                builder.setItems(items, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        System.out.println(i);
-                    }
-                });
-                builder.show();
+                MaterialAlertDialogBuilder materialAlertDialogBuilder = new MaterialAlertDialogBuilder(getContext());
+                materialAlertDialogBuilder
+                        .setTitle("题量选择")
+                        .setSingleChoiceItems(items, 0, (dialogInterface, i) -> {
+                            if (i == 0) {
+                                num[0] = 10;
+                            } else {
+                                num[0] = 15;
+                            }
+                        })
+                        .setNegativeButton("取消", null)
+                        .setPositiveButton("确定", (dialogInterface, i) -> proNumText.setText("题量:" + num[0]))
+                        .show();
             }
         });
-
     }
 }
