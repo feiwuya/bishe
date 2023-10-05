@@ -33,7 +33,7 @@ public class QuickCalActivity extends AppCompatActivity {
         okNum.setText(currentProblem + "/" + calSettings.getNumber());
         TextView standardText = (TextView) findViewById(R.id.standard);
         standardText.setText("合格:" + calSettings.getQualifyingTime() + "s  良好:" + calSettings.getGoodTime() + "s  优秀:" + calSettings.getExcellentTime() + "s");
-        List<CalProblem> problems = new ArrayList<>(); // 题目所有信息
+        ArrayList<CalProblem> problems = new ArrayList<>(); // 题目所有信息
         String expression = null; // 算式
         inputResult.setText("");
         problems.clear();

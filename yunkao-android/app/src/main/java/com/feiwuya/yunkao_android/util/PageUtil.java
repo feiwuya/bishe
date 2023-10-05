@@ -1,23 +1,28 @@
 package com.feiwuya.yunkao_android.util;
 
+import android.content.Intent;
 import android.os.SystemClock;
 import android.util.DisplayMetrics;
 import android.widget.Chronometer;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.feiwuya.yunkao_android.QuickCalResultActivity;
 import com.feiwuya.yunkao_android.R;
 import com.feiwuya.yunkao_android.pojo.CalProblem;
 import com.feiwuya.yunkao_android.pojo.QuickCalSettings;
 import com.google.android.material.button.MaterialButton;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.atomic.AtomicInteger;
 
 public class PageUtil {
     // 添加键盘
-    public static void generateKeyboard(LinearLayout layout, AppCompatActivity activity, TextView inputResult, QuickCalSettings calSettings, List<CalProblem> problems) {
+    public static void generateKeyboard(LinearLayout layout, AppCompatActivity activity, TextView inputResult, QuickCalSettings calSettings, ArrayList<CalProblem> problems) {
         layout.setPadding(40, 0, 40, 0);
         // 第一行
         LinearLayout linearLayoutOne = new LinearLayout(activity);
@@ -26,13 +31,15 @@ public class PageUtil {
         activity.getWindowManager().getDefaultDisplay().getMetrics(dm);
         int widthPixels = dm.widthPixels;// 屏幕宽度
         MaterialButton againBtn = new MaterialButton(activity); // 重开按钮
+        final int[] currentProblemNum = {1}; // 正在做的题目位置
         againBtn.setText("重开");
         againBtn.setWidth((widthPixels - 80) / 3);
+        Chronometer chronometer = (Chronometer) (activity.findViewById(R.id.chronometer));
         againBtn.setOnClickListener(view -> {
-            Chronometer chronometer = (Chronometer) (activity.findViewById(R.id.chronometer));
             chronometer.setBase(SystemClock.elapsedRealtime()); // 计时器复位
             chronometer.start(); // 重新计时
             String expression = null; // 算式
+            currentProblemNum[0] = 1; // 正在做的题目位置
             inputResult.setText("");
             problems.clear();
             if (calSettings.getType() == 1) {
@@ -194,7 +201,67 @@ public class PageUtil {
         MaterialButton btnSure = new MaterialButton(activity);
         btnSure.setText("确认");
         btnSure.setWidth((widthPixels - 80) / 3);
-        //TODO: 确认点击事件
+        btnSure.setOnClickListener(view -> {
+            if (inputResult.getText().length() != 0) {
+                // 记录花费时间
+                problems.get(problems.size() - 1).setTime(SystemClock.elapsedRealtime() - chronometer.getBase());
+                // 记录输入的答案
+                problems.get(problems.size() - 1).setInputAnswer(inputResult.getText().toString());
+                // 题目设置
+                if (currentProblemNum[0] < calSettings.getNumber()) {
+                    String expression = null; // 算式
+                    inputResult.setText("");
+                    if (calSettings.getType() == 1) {
+                        expression = CalculateUtils.type1();
+                    } else if (calSettings.getType() == 2) {
+                        expression = CalculateUtils.type2();
+                    } else if (calSettings.getType() == 3) {
+                        expression = CalculateUtils.type3();
+                    } else if (calSettings.getType() == 4) {
+                        expression = CalculateUtils.type4();
+                    } else if (calSettings.getType() == 5) {
+                        expression = CalculateUtils.type5();
+                    } else if (calSettings.getType() == 6) {
+                        expression = CalculateUtils.type6();
+                    } else if (calSettings.getType() == 7) {
+                        expression = CalculateUtils.type7();
+                    } else if (calSettings.getType() == 8) {
+                        expression = CalculateUtils.type8();
+                    } else if (calSettings.getType() == 9) {
+                        expression = CalculateUtils.type9();
+                    } else if (calSettings.getType() == 10) {
+                        expression = CalculateUtils.type10();
+                    } else if (calSettings.getType() == 11) {
+                        expression = CalculateUtils.type11();
+                    } else if (calSettings.getType() == 12) {
+                        expression = CalculateUtils.type12();
+                    } else if (calSettings.getType() == 13) {
+                        expression = CalculateUtils.type13();
+                    } else if (calSettings.getType() == 14) {
+                        expression = CalculateUtils.type14();
+                    } else if (calSettings.getType() == 15) {
+                        expression = CalculateUtils.type15();
+                    } else if (calSettings.getType() == 16) {
+                        expression = CalculateUtils.type16();
+                    }
+                    System.out.println("点击确定添加题目");
+                    problems.add(new CalProblem(expression, CalculateUtils.calculate(expression)));
+                    ((TextView) activity.findViewById(R.id.problem)).setText(expression + " = ");
+                    currentProblemNum[0] += 1;
+                } else {
+                    // 跳转到总结页面
+                    Intent intent = new Intent(activity, QuickCalResultActivity.class);
+                    intent.putExtra("problems", problems);
+                    activity.startActivity(intent);
+                }
+            } else {
+                // 弹出提示
+                Toast.makeText(activity, "请输入答案！", Toast.LENGTH_SHORT).show();
+            }
+
+
+        });
+
 
         btnPoint.setLayoutParams(buttonParams);
         btnZero.setLayoutParams(buttonParams);

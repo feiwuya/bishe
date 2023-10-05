@@ -1,11 +1,15 @@
 package com.feiwuya.yunkao_android.pojo;
 
-public class CalProblem {
+import java.io.Serializable;
+
+public class CalProblem implements Serializable{
     private String formula; // 算式
     private double correctAnswer; // 正确答案
     private String inputAnswer; // 输入答案
     private boolean error; // 是否有误差
     private double errorScope; // 误差范围
+    // 做题时间
+    private long time;
 
     public CalProblem(String formula, double correctAnswer) {
         this.formula = formula;
@@ -65,5 +69,25 @@ public class CalProblem {
 
     public void setErrorScope(double errorScope) {
         this.errorScope = errorScope;
+    }
+
+    public long getTime() {
+        return time;
+    }
+
+    public void setTime(long time) {
+        this.time = time;
+    }
+
+    @Override
+    public String toString() {
+        return "CalProblem{" +
+                "formula='" + formula + '\'' +
+                ", correctAnswer=" + correctAnswer +
+                ", inputAnswer='" + inputAnswer + '\'' +
+                ", error=" + error +
+                ", errorScope=" + errorScope +
+                ", time=" + time +
+                '}';
     }
 }

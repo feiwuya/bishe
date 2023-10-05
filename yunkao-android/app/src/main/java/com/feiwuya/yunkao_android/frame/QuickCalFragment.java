@@ -292,7 +292,7 @@ public class QuickCalFragment extends Fragment {
                 Button button = selectedBtn.get(0);
                 // 题型
                 if (button.getId() == R.id.p_btn1)
-                  intent.putExtra("calSettings", new QuickCalSettings(num[0], 1, 28, 22, 18, 0));
+                    intent.putExtra("calSettings", new QuickCalSettings(num[0], 1, 28, 22, 18, 0));
                 if (button.getId() == R.id.p_btn2)
                     intent.putExtra("calSettings", new QuickCalSettings(num[0], 2, 28, 22, 18, 0));
                 if (button.getId() == R.id.p_btn3)
